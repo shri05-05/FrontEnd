@@ -1,45 +1,48 @@
-// script.js
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-// Add product to cart
-function addToCart(productName, price) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ productName, price });
+function addToCart(product, price) {
+  cart.push({ product, price });
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${productName} added to cart!`);
+  alert(`${product} added to cart`);
 }
 
-// Display cart items
 function displayCart() {
-  const cartContainer = document.getElementById("cart-items");
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let total = 0;
+  const cartList = document.getElementById("cartList");
+  if (!cartList) return;
+  cartList.innerHTML = "";
+  cart.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.product} - ₹${item.price}`;
+    cartList.appendChild(li);
+  });
+}
 
+function placeOrder() {
   if (cart.length === 0) {
-    cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+    alert("Your cart is empty!");
     return;
   }
-
-  cartContainer.innerHTML = "";
-  cart.forEach((item, index) => {
-    total += item.price;
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <p>${item.productName} - ₹${item.price}</p>
-      <button onclick="removeFromCart(${index})">Remove</button>
-    `;
-    cartContainer.appendChild(div);
-  });
-
-  const totalDiv = document.createElement("p");
-  totalDiv.innerHTML = `<strong>Total:</strong> ₹${total}`;
-  cartContainer.appendChild(totalDiv);
-}
-
-// Remove product from cart
-function removeFromCart(index) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1);
+  orders = orders.concat(cart);
+  localStorage.setItem("orders", JSON.stringify(orders));
+  cart = [];
   localStorage.setItem("cart", JSON.stringify(cart));
+  document.getElementById("orderMessage").textContent = "✅ Order placed successfully!";
   displayCart();
 }
+
+function displayOrders() {
+  const orderList = document.getElementById("orderList");
+  if (!orderList) return;
+  orderList.innerHTML = "";
+  orders.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = `${item.product} - ₹${item.price}`;
+    orderList.appendChild(li);
+  });
+}
+
+window.onload = function () {
+  displayCart();
+  displayOrders();
+};
