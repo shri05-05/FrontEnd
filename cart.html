@@ -2,28 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cart</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    .item {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
+    body { font-family: Arial; padding: 20px; }
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 10px 0; }
+    button { background: blue; color: white; padding: 5px 10px; border: none; }
   </style>
 </head>
 <body>
   <h1>Your Cart</h1>
-  <div id="cart-items"></div>
-  <br><br>
-  <a href="index.html">Back to Home</a>
+  <ul id="cartList"></ul>
+  <button onclick="placeOrder()">Place Order</button>
+  <p id="orderMessage"></p>
+  <br><a href="index.html">⬅ Back to Home</a>
   <script src="script.js"></script>
-  <script>window.onload = displayCart;</script>
 </body>
 </html>
