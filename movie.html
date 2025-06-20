@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Booking</title>
+</head>
+<body>
+
+  <h2>Movie Booking Form</h2>
+
+  <form onsubmit="bookTicket(); return false;">
+    <label>Name:</label><br>
+    <input type="text" id="name"><br><br>
+
+    <label>Movie:</label><br>
+    <select id="movie">
+      <option>Master</option>
+      <option>KGF</option>
+      <option>Leo</option>
+    </select><br><br>
+
+    <label>Tickets:</label><br>
+    <input type="number" id="tickets"><br><br>
+
+    <input type="submit" value="Pay">
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    function bookTicket() {
+      var movie = document.getElementById("movie").value;
+      var name = document.getElementById("name").value;
+      var tickets = document.getElementById("tickets").value;
+
+      if (name === "" || tickets === "") {
+        alert("Please enter your name and number of tickets.");
+        return;
+      }
+
+      // Show alert notification
+      alert(
+        `Name: ${name}\nMovie: ${movie}\nTickets: ${tickets}`
+      );
+    }
+  </script>
+
+</body>
+</html>
