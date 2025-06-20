@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login and signup page</title>
+<style>
+    body{
+        font-family:Arial, Helvetica, sans-serif;
+        margin: 20px;
+    }
+    .container{
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        background: #32d0b6;
+    }
+    input{
+        display: block;
+        margin-bottom: 15px;
+        width: 95%;
+        padding: 10px;
+    }
+    button{
+        width: 100%;
+        padding: 10px;
+        background: #c70a0a;
+        color: #b8ff06;
+        border: none;
+        border-radius: 5px;
+    }
+    button:hover{
+        background: #0056b3;
+    }
+    p{
+        color:rgb(2, 9, 1);
+    }
+</style>
+</head>
+<body>
+    <h1>Login /signup</h1>
+    <div class="container">
+        <h2>Signup</h2>
+        <input id="signupusername" placeholder="Username">
+        <input id="signuppassword" type="password" placeholder="Password">
+        <button id="signupbtn">Signup</button>
+        <p id="signupmessage"></p>
+        
+    </div>
+    <br>
+    <div class="container">
+        <h2>Login</h2>
+        <input id="loginusername" placeholder="Username">
+        <input id="loginpassword" type="password" placeholder="Password">
+        <button id="loginbtn">Login</button>
+        <p id="loginmessage"></p>
+        
+    </div>
+    <script>
+        document.getElementById('signupbtn').addEventListener('click',()=>{
+            const Username=document.getElementById('signupusername').value.trim();
+            const password=document.getElementById('signuppassword').value.trim();
+       if(Username && password){
+        if(localStorage.getItem(Username)){
+            document.getElementById('signupmessage').innerText="user already exists.";
+        }
+        else{
+            localStorage.setItem(Username,password);
+            document.getElementById('signupmessage').innerText="signup successful";
+            document.getElementById('signupusername').value='';
+            document.getElementById('signuppassword').value='';
+        }
+       }
+       else{
+        document.getElementById('signupmessage').innerText="please fill all the feilds.";
+            
+       }
+        });
+    </script>
+    <script>
+document.getElementById('loginbtn').addEventListener('click', () => {
+    const username = document.getElementById('loginusername').value.trim();
+    const password = document.getElementById('loginpassword').value.trim();
+    
+    if (username && password) {
+        const storedPassword = localStorage.getItem(username);
+        if (storedPassword && storedPassword === password) {
+            document.getElementById('loginmessage').style.color = "green";
+            document.getElementById('loginmessage').innerText = "Login successful!";
+        } else {
+            document.getElementById('loginmessage').style.color = "red";
+            document.getElementById('loginmessage').innerText = "Invalid username or password.";
+        }
+    } else {
+        document.getElementById('loginmessage').style.color = "red";
+        document.getElementById('loginmessage').innerText = "Please fill all the fields.";
+    }
+});
+</script>
+<script>
+document.getElementById('loginbtn').addEventListener('click', () => {
+    const username = document.getElementById('loginusername').value.trim();
+    const password = document.getElementById('loginpassword').value.trim();
+    
+    if (username && password) {
+        const storedPassword = localStorage.getItem(username);
+        if (storedPassword && storedPassword === password) {
+            document.getElementById('loginmessage').style.color = "green";
+            document.getElementById('loginmessage').innerText = "Login successful!";
+        } else {
+            document.getElementById('loginmessage').style.color = "red";
+            document.getElementById('loginmessage').innerText = "Invalid username or password.";
+        }
+    } else {
+        document.getElementById('loginmessage').style.color = "red";
+        document.getElementById('loginmessage').innerText = "Please fill all the fields.";
+    }
+});
+</script>
+</body>
+</html>
